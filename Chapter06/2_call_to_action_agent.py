@@ -278,6 +278,7 @@ class PPOAgent:
 
     def train(self, max_episodes=1000):
         with writer.as_default():
+            total_reward = 0
             for ep in range(max_episodes):
                 state_batch = []
                 action_batch = []
@@ -293,11 +294,10 @@ class PPOAgent:
                 while not done:
                     # self.env.render()
                     log_old_policy, action = self.actor.get_action(state)
-                    print(action)
                     next_state, reward, dones, _ = self.env.step(action)
                     step_num += 1
                     print(
-                        f"ep#:{ep} step#:{step_num} step_rew:{reward} action:{action} dones:{dones}"
+                        f"ep#:{ep} step#:{step_num} step_rew:{reward} action:{action} dones:{dones} tot_rew:{total_reward}"
                     )
                     done = np.all(dones)
                     if done:
@@ -351,6 +351,10 @@ class PPOAgent:
                         old_policy_batch = []
 
                     episode_reward += reward[0][0]
+
+                    if reward[0][0] > 0:
+                        total_reward += reward[0][0]
+
                     state = next_state[0]
 
                 print(f"Episode#{ep} Reward:{episode_reward} Actions:{action_batch}")
@@ -361,4 +365,4 @@ if __name__ == "__main__":
     env_name = "MiniWoBClickButtonVisualEnv-v0"
     env = gym.make(env_name)
     cta_agent = PPOAgent(env)
-    cta_agent.train(max_episodes=2)  # Increase max_episodes value
+    cta_agent.train(max_episodes=100)  # Increase max_episodes value

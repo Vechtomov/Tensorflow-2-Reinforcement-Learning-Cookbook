@@ -29,7 +29,7 @@ class MiniWoBVisualClickEnv(MiniWoBEnv):
         self.obs_im_height = 64
         self.num_channels = 3  # RGB
         self.obs_im_size = (self.obs_im_width, self.obs_im_height)
-        super().__init__(self.miniwob_env_name, self.obs_im_size, num_instances)
+        super().__init__(self.miniwob_env_name, self.obs_im_size, num_instances, headless = True)
 
         self.observation_space = gym.spaces.Box(
             0,
@@ -204,7 +204,7 @@ class MiniWoBVisualClickAndTypeEnv(MiniWoBEnv):
 
 class MiniWoBClickButtonVisualEnv(MiniWoBVisualClickEnv):
     def __init__(self, num_instances=1):
-        super().__init__("click-button", num_instances)
+        super().__init__("click-test", num_instances)
 
 
 class MiniWoBEmailInboxImportantVisualEnv(MiniWoBVisualClickEnv):

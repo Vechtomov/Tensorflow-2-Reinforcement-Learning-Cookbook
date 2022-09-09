@@ -11,7 +11,7 @@ from miniwob.action import MiniWoBCoordClick
 from miniwob.environment import MiniWoBEnvironment
 
 cur_path_dir = os.path.dirname(os.path.realpath(__file__))
-miniwob_dir = os.path.join(cur_path_dir, "miniwob", "html", "miniwob")
+miniwob_dir = os.path.join(cur_path_dir, "miniwob", "html", "miniwob/")
 
 
 class MiniWoBEnv(MiniWoBEnvironment, gym.Env):
