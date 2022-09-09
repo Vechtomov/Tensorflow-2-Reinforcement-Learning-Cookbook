@@ -22,10 +22,11 @@ class MiniWoBEnv(MiniWoBEnvironment, gym.Env):
         num_instances: int = 1,
         miniwob_dir: str = miniwob_dir,
         seeds: list = [1],
+        **instance_kwargs
     ):
         super().__init__(env_name)
         self.base_url = f"file://{miniwob_dir}"
-        self.configure(num_instances=num_instances, seeds=seeds, base_url=self.base_url)
+        self.configure(num_instances=num_instances, seeds=seeds, base_url=self.base_url, **instance_kwargs)
         # self.set_record_screenshots(True)
         self.obs_im_shape = obs_im_shape
 

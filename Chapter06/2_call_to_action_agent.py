@@ -130,6 +130,7 @@ class Actor:
             # Convert (w, h, c) to (1, w, h, c)
             state_np = np.expand_dims(state_np, 0)
         mu, std = self.model.predict(state_np)
+        mu, std = mu[0], std[0]
         action = np.random.normal(mu, std + self.eps, size=self.action_dim).astype(
             "int"
         )
@@ -176,7 +177,7 @@ class Critic:
         self.state_dim = state_dim
         self.weight_initializer = tf.keras.initializers.he_normal()
         self.model = self.nn_model()
-        self.model.summary()  # Print a summary of the Critic model
+        # self.model.summary()  # Print a summary of the Critic model
         self.opt = tf.keras.optimizers.Nadam(args.critic_lr)
 
     def nn_model(self):
@@ -292,7 +293,7 @@ class PPOAgent:
                 while not done:
                     # self.env.render()
                     log_old_policy, action = self.actor.get_action(state)
-
+                    print(action)
                     next_state, reward, dones, _ = self.env.step(action)
                     step_num += 1
                     print(

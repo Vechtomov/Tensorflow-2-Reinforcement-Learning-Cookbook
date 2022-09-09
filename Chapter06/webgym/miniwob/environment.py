@@ -181,7 +181,9 @@ def test_environment():
         print("Usage: python {} TASK_NAME".format(sys.argv[0]))
         exit(1)
     env = MiniWoBEnvironment(task_name)
-    base_url = os.environ.get("MINIWOB_BASE_URL")
+    # base_url = os.environ.get("MINIWOB_BASE_URL")
+    cur_path_dir = os.path.dirname(os.path.realpath(__file__))
+    base_url = f'file://{os.path.join(cur_path_dir, "html", "miniwob")}'
     env.configure(num_instances=1, seeds=[0], base_url=base_url)
     states = env.reset()
     print(states[0].dom.visualize())

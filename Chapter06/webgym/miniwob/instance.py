@@ -28,10 +28,10 @@ class MiniWoBInstance(Thread):
     DEFAULT_BASE_URL = "http://localhost:8000/"
 
     # Added some space for title bar
-    WINDOW_WIDTH = 500
-    WINDOW_HEIGHT = 240
-    TASK_WIDTH = 320
-    TASK_HEIGHT = 320
+    WINDOW_WIDTH = 350
+    WINDOW_HEIGHT = 350
+    TASK_WIDTH = 160
+    TASK_HEIGHT = 210
 
     FLIGHT_WINDOW_WIDTH = 600
     FLIGHT_WINDOW_HEIGHT = 700
@@ -96,7 +96,7 @@ class MiniWoBInstance(Thread):
             self.task_width = self.FLIGHT_TASK_WIDTH
             self.task_height = self.FLIGHT_TASK_HEIGHT
         else:
-            self.url = urlparse.urljoin(base_url, "miniwob/{}.html".format(subdomain))
+            self.url = urlparse.urljoin(base_url, "{}.html".format(subdomain))
             self.window_width = self.WINDOW_WIDTH
             self.window_height = self.WINDOW_HEIGHT
             self.task_width = self.TASK_WIDTH
@@ -169,9 +169,7 @@ class MiniWoBInstance(Thread):
                 "window-size={},{}".format(self.window_width, self.window_height)
             )
             options.add_argument(
-                "window-position={},{}".format(
-                    9000, 30 + self.index * (self.window_height + 30)
-                )
+                "window-position={},{}".format(10, 100)
             )
         self.driver = webdriver.Chrome(chrome_options=options)
         self.driver.implicitly_wait(5)
