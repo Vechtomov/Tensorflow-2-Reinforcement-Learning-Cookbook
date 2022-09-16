@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Click Test Task</title>
+  <!-- stylesheets -->
+  <link rel="stylesheet" type="text/css" href="../core/core.css">
+  <!-- JS -->
+  <script src="../core/core.js"></script>
+  <script src="../core/d3.v3.min.js"></script>
+  <script src="../common/ui_utils.js"></script>
+  <style>
+    #query {
+      display: none;
+    }
+  </style>
+
+  <style>
+    #target {
+      width: 40px;
+      height: 40px;
+      background-color: black;
+    }
+  </style>
+
+  <script>
+
+    var getDistance = function (value, low, high) {
+      if (value < low)
+        return low - value;
+      if (value > high)
+        return value - high;
+      return 0;
+    }
+
+    var onEpisodeEnded = function () {
+      // console.log('episode ended');
+    }
+
+    var genProblem = function () {
+      var w = core.randi(35, 100);
+      var L = core.randi(0, 160 - w - 2);
+      var U = core.randi(0, 160 - w - 2);
+
+      console.log("Button props", L, U, w);
+
+      var btn = d3.select('#target');
+      btn.attr('style', 'margin-left:' + L + 'px; margin-top:' + U + 'px; width:' + w + 'px; height:' + w + 'px;');
+      function onClickFunc(event) {
+        // console.log(event);
+        var x = event.pageX;
+        var y = event.pageY;
+        var dX = getDistance(x, L, L + w);
+        var dY = getDistance(y, U, U + w);
+        var distance = Math.sqrt(dX * dX + dY * dY);
+        console.log("Click", x, y, distance);
+        WOB_REWARD_INFO = {x: L, y: U, w: w}
+        core.endEpisode(distance === 0 ? 1 : -distance / 100, true);
+      }
+      document.addEventListener('click', onClickFunc);
+      onEpisodeEnded = function () {
+        // console.log('episode ended override');
+        document.removeEventListener('click', onClickFunc);
+      }
+    }
+
+    window.onload = function () {
+      core.startEpisode();
+    }
+  </script>
+</head>
+
+<body>
+  <div id="wrap">
+    <div id="query">Click the button.</div>
+    <div id="area">
+      <div id="target"></div>
+    </div>
+  </div>
+</body>
+
+</html>

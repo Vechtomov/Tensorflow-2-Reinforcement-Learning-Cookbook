@@ -204,7 +204,7 @@ class MiniWoBVisualClickAndTypeEnv(MiniWoBEnv):
 
 class MiniWoBClickButtonVisualEnv(MiniWoBVisualClickEnv):
     def __init__(self, num_instances=1):
-        super().__init__("click-test", num_instances)
+        super().__init__("click-test-new", num_instances)
 
 
 class MiniWoBEmailInboxImportantVisualEnv(MiniWoBVisualClickEnv):

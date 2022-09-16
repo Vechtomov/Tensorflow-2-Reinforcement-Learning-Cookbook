@@ -365,4 +365,4 @@ if __name__ == "__main__":
     env_name = "MiniWoBClickButtonVisualEnv-v0"
     env = gym.make(env_name)
     cta_agent = PPOAgent(env)
-    cta_agent.train(max_episodes=100)  # Increase max_episodes value
+    cta_agent.train(max_episodes=10000)  # Increase max_episodes value

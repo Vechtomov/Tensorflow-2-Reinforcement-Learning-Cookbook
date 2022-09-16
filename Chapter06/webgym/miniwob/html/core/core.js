@@ -47,6 +47,7 @@ var WOB_REWARD_REASON = null; // reason for the reward
 var WOB_DONE_GLOBAL = false; // a done indicator
 var WOB_EPISODE_ID = 0; // number of episodes done so far
 var WOB_TASK_READY = true; // override this to show that the task is not ready yet
+var WOB_REWARD_INFO = {};
 core.EPISODE_MAX_TIME = 10000; // in ms. Set default time to 10s.
 
 // https://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript
@@ -111,6 +112,10 @@ core.endEpisode = function(reward, time_proportional, reason) {
   } else {
     // if timer is null, don't reward anything and exit out.
     return;
+  }
+
+  if (typeof onEpisodeEnded !== "undefined"){
+    onEpisodeEnded();
   }
 
   WOB_RAW_REWARD_GLOBAL = reward;

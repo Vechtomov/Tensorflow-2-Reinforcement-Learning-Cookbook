@@ -398,6 +398,7 @@ FIELD_EXTRACTORS["click-tab-2-easy"] = FIELD_EXTRACTORS[
 ] = FIELD_EXTRACTORS["click-tab-2-hard"] = FIELD_EXTRACTORS["click-tab-2"]
 
 _add("click-test", r"Click the button\.", [])
+_add("click-test-new", r"Click the button\.", [])
 
 _add("click-test-2", r"Click button (.*)\.", ["target"])
 
